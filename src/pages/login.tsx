@@ -1,33 +1,34 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { signUpTypes } from "../types/signUpTypes";
+import { loginpTypes } from "../types/loginTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
-import signUpSchema from "./signUpSchema";
+import loginSchema from "./loginSchema";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
+const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<signUpTypes>({ resolver: yupResolver(signUpSchema) });
+  } = useForm<loginpTypes>({ resolver: yupResolver(loginSchema) });
 
   const [serverError, setServerError] = useState<string | null>(null);
-  console.log(serverError);
 
-  const onSubmit = async (data: signUpTypes) => {
-    const url = "http://localhost:3000/api/register";
+  const onSubmit = async (data: loginpTypes) => {
+    const url = "http://localhost:3000/api/login";
 
     const userData = {
       email: data.email,
       password: data.password,
-      repeatPassword: data.repeatPassword,
     };
 
     try {
-      await axios.post(url, userData);
+      const response = await axios.post(url, userData);
+
+      const authToken = response.data.token;
+      localStorage.satItem(authToken);
 
       reset();
     } catch (error: any) {
@@ -36,12 +37,12 @@ const SignUp = () => {
     }
   };
   const navigate = useNavigate();
-  const signUpClickhandler = () => {
-    navigate("/login");
+  const signUpClickHandler = () => {
+    navigate("/signUp");
   };
 
   return (
-    <div className="bg-darckBlue px-6 pt-12 pb-[88px] h-full">
+    <div className="bg-darckBlue px-6 pt-12 pb-[167px] h-full">
       <div className="flex justify-center mb-[58px]">
         <svg width="33" height="27" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -57,14 +58,14 @@ const SignUp = () => {
         >
           <div className="w-full">
             <h1 className="text-white font-outfit font-normal text-[32px] mb-10 ">
-              Sign Up
+              Login
             </h1>
           </div>
-          <div className="w-full pl-4 mb-[16px] relative ">
+          <div className="w-full pl-4 mb-[16px] relative">
             <input
               placeholder="Email address"
-              type="email"
-              className="type-text outline-none bg-semyDarck placeholder-slate-400 placeholder:font-outfit placeholder:font-normal text-base w-full text-white "
+              // type="email"
+              className="type-text outline-none bg-semyDarck  placeholder-slate-400 placeholder:font-outfit placeholder:font-normal text-base w-full text-white "
               {...register("email")}
             />
             <div className="w-full absolute top-5">
@@ -92,37 +93,21 @@ const SignUp = () => {
             </div>
           </div>
           <div className="h-[1px] bg-grey w-full mb-6"></div>
-          <div className="w-full pl-4 mb-[16px] relative">
-            <input
-              type="password"
-              placeholder="Repeat Password"
-              className="type-text outline-none bg-semyDarck placeholder-slate-400  placeholder:font-outfit placeholder:font-normal text-base w-full text-white"
-              {...register("repeatPassword")}
-            />
-            <div className="absolute top-5">
-              {errors.repeatPassword ? (
-                <p className="text-red text-[13px]">
-                  {errors.repeatPassword.message}
-                </p>
-              ) : null}
-            </div>
-          </div>
-          <div className="h-[1px] bg-grey w-full mb-10"></div>
 
           <button
             type="submit"
             className="text-white bg-red font-outfit text-base py-[14px] w-full rounded-md mb-6"
           >
-            Create an Account
+            Login to your account
           </button>
 
           <h2 className="text-white font-outfit text-base">
             Alread have an account?
             <span
-              onClick={signUpClickhandler}
+              onClick={signUpClickHandler}
               className="font-outfit text-red ml-2"
             >
-              Login
+              Sign Up
             </span>
           </h2>
         </form>
@@ -131,4 +116,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
