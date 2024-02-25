@@ -1,33 +1,140 @@
-import logo from "../assets/logo.svg";
-import navHome from "../assets/icon-nav-home.svg";
-import navMovies from "../assets/icon-nav-movies.svg";
-import navTv from "../assets/icon-nav-tv-series.svg";
-import navBookmark from "../assets/icon-nav-bookmark.svg";
-import avatar from "../assets/image-avatar.png";
+import search from "../assets/icon-search.svg";
+import axios from "axios";
+import { allMovieTypes } from "../types/allMovieTypes.js";
+import { useState, useEffect } from "react";
+import movieLogoWhite from "../assets/icon-category-movie.svg";
+import bookmarkEmpty from "../assets/icon-bookmark-empty.svg";
+import bookmarkFull from "../assets/icon-bookmark-full.svg";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
+  const [allMovies, setAllMovies] = useState<allMovieTypes[]>([]);
+  console.log(allMovies);
+  const url = "http://localhost:3000/api/allMovies";
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const response = await axios.get(url);
+      setAllMovies(response.data);
+    };
+    fetchMovies();
+  }, []);
+
+  const settings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1.4, // Show more slides at once
+    slidesToScroll: 1, // Scroll one slide at a time
+    prevArrow: <></>,
+    nextArrow: <></>,
+  };
   return (
     <>
-      <div className="relative bg-black">
-        <header className="absolute bg-semyDarck flex justify-between items-center p-4 w-full">
-          <div>
-            <img className="w-[25px] h-5" src={logo} />
-          </div>
-          <div className="w-[134px]">
-            <div className="flex justify-between">
-              <img className="w-4 h-4" src={navHome} />
+      <div className="bg-black pt-[27px] pb-[60px]">
+        <div className="flex items-center pl-[19px] pr-[102px] gap-4 mb-[27px]">
+          <img className="w-[24px] h-[24px]" src={search} />
+          <input
+            className="text-white font-outfit text-base w-full outline-none bg-transparent"
+            placeholder="Search for movies or TV series"
+          />
+        </div>
+        <div className="mb-[26px]">
+          <h1 className="text-white pl-4 mb-4">Trending</h1>
+          <Slider {...settings} className="pl-4">
+            {allMovies.map((movie, index) =>
+              movie.isTrending ? (
+                <div key={index} className="relative">
+                  <img
+                    className="rounded-xl w-[240px] h-[140px]"
+                    src={movie.thumbnail.trending.small}
+                    alt="Thumbnail"
+                  />
 
-              <img className="w-4 h-4" src={navMovies} />
+                  <div className="absolute top-0 font-outfit pt-2 pr-2 pb-4 pl-4 h-full w-[240px]">
+                    <div className="flex">
+                      <div className="flex flex-col mt-[80px]">
+                        <div className="flex text-white opacity-[75%] items-center text-xs">
+                          <div>{movie.year}</div>
+                          <div className="bg-white ml-2 rounded-full w-[3px] h-[3px]" />
+                          <img
+                            className="w-3 h-3 ml-[6px]"
+                            src={movieLogoWhite}
+                          />
+                          <div className="ml-[6px]">{movie.category}</div>
+                        </div>
+                        <h1 className="text-white text-[15px] font-bold">
+                          {movie.title}
+                        </h1>
+                      </div>
 
-              <img className="w-4 h-4" src={navTv} />
+                      <div className="flex flex-col ml-auto h-full gap-14 mr-2 ">
+                        <div className="">
+                          {movie.isBookmarked ? (
+                            <div className="h-8 w-8 bg-[#10141E] opacity-[50%] rounded-full flex items-center justify-center">
+                              <img src={bookmarkFull} alt="bookmarkEmpty" />
+                            </div>
+                          ) : (
+                            <div className="h-8 w-8 bg-[#10141E] bg-opacity-[50%] rounded-full flex items-center justify-center">
+                              <img src={bookmarkEmpty} alt="bookmarkEmpty" />
+                            </div>
+                          )}
+                        </div>
 
-              <img className="w-[14px] h-4" src={navBookmark} />
-            </div>
+                        <div className="items-center w-[34px] h-[21px]  bg-[#10141E] bg-opacity-[50%] rounded-full flex justify-center">
+                          <div className="text-white text-[13px]">
+                            {movie.rating}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : null
+            )}
+          </Slider>
+        </div>
+        <div className="px-4 ">
+          <h1 className="text-xl font-outfit text-white mb-6">
+            Recomended for you
+          </h1>
+          <div className="flex flex-wrap  justify-between mb-4">
+            {allMovies.slice(2).map((movie, index) => (
+              <div key={index} className="relative">
+                <div>
+                  <img
+                    className="w-[164px] h-[110px] rounded-lg mb-2"
+                    src={movie.thumbnail.regular.small}
+                  />
+                </div>
+
+                <div className="absolute top-0 right-0 mt-2 mr-2">
+                  {movie.isBookmarked ? (
+                    <div className="h-8 w-8 bg-[#10141E] opacity-[50%] rounded-full flex items-center justify-center">
+                      <img src={bookmarkFull} alt="bookmarkEmpty" />
+                    </div>
+                  ) : (
+                    <div className="h-8 w-8 bg-[#10141E] bg-opacity-[50%] rounded-full flex items-center justify-center">
+                      <img src={bookmarkEmpty} alt="bookmarkEmpty" />
+                    </div>
+                  )}
+                </div>
+                <div className="flex text-white opacity-[75%] items-center text-xs mb-2">
+                  <div>{movie.year}</div>
+                  <div className="bg-white rounded-full w-[3px] h-[3px] ml-[6px]" />
+                  <img className="w-3 h-3 ml-[6px]" src={movieLogoWhite} />
+                  <div className="ml-1">{movie.category}</div>
+                  <div className="bg-white rounded-full w-[3px] h-[3px] ml-[6px]" />
+                  <div className="ml-[6px]">{movie.rating}</div>
+                </div>
+                <h1 className="text-[15px] text-white mb-4 font-bold">
+                  {movie.title}
+                </h1>
+              </div>
+            ))}
           </div>
-          <div className="h-6 w-6">
-            <img src={avatar} />
-          </div>
-        </header>
+        </div>
       </div>
     </>
   );

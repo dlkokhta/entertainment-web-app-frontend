@@ -7,8 +7,8 @@ import avatar from "../assets/image-avatar.png";
 
 const Header = () => {
   return (
-    <>
-      <div className="absolute bg-semyDarck flex justify-between items-center p-4 w-full">
+    <div className="relative">
+      <div className="bg-semyDarck flex justify-between items-center p-4 w-full">
         <div>
           <img className="w-[25px] h-5" src={logo} />
         </div>
@@ -27,7 +27,7 @@ const Header = () => {
           <img src={avatar} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
