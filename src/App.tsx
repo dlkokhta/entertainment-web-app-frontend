@@ -5,10 +5,11 @@ import Login from "./pages/login";
 import Home from "./pages/home";
 import Header from "./components/Header";
 import { useLocation } from "react-router-dom";
+import Movies from "./pages/movies";
 
 function App() {
   const location = useLocation();
-  const showHeader = location.pathname === "/home";
+  const showHeader = location.pathname ? "/home" || "/movies" : "";
   return (
     <>
       {showHeader && <Header />}
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/movies" element={<Movies />} />
       </Routes>
     </>
   );
