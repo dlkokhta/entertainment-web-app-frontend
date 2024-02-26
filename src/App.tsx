@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import { useLocation } from "react-router-dom";
 import Movies from "./pages/movies";
 import TVSeries from "./pages/tvSeries";
+import Bookmarked from "./pages/bookmarked";
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/tvSeries" element={<TVSeries />} />
+        <Route path="/bookmarked" element={<Bookmarked />} />
       </Routes>
     </>
   );
