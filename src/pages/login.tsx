@@ -20,16 +20,20 @@ const Login = () => {
     const url = "http://localhost:3000/api/login";
 
     const userData = {
-      email: data.email,
-      password: data.password,
+      email: data?.email,
+      password: data?.password,
     };
-
+    console.log(userData);
     try {
       const response = await axios.post(url, userData);
 
       const authToken = response.data.token;
-      localStorage.satItem(authToken);
 
+      localStorage.setItem("authToken", authToken);
+      localStorage.setItem("data.email", data.email);
+
+      navigate("/");
+      console.log("authToken", authToken);
       reset();
     } catch (error: any) {
       setServerError(error.response.data[0].type);

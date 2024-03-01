@@ -16,4 +16,5 @@ export interface allMovieTypes {
   rating: string;
   isBookmarked: boolean;
   isTrending: boolean;
+  movieID: string;
 }

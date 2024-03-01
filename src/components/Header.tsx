@@ -1,9 +1,4 @@
 import logo from "../assets/logo.svg";
-import navHome from "../assets/icon-nav-home.svg";
-// import navHomeWhite from "../assets/icon-nav-home.svg"
-import navMovies from "../assets/icon-nav-movies.svg";
-import navTv from "../assets/icon-nav-tv-series.svg";
-import navBookmark from "../assets/icon-nav-bookmark.svg";
 import avatar from "../assets/image-avatar.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
