@@ -8,14 +8,21 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store.js";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setBookmarked } from "../store/bookmarkedSlice.js";
 import AllMoviesComponent from "../components/AllMoviesComponent.js";
+import axios from "axios";
 const Home = () => {
   const allMovies: allMovieTypes[] = useSelector(
     (store: RootState) => store.allMovies.movies
   );
   const allCategory = allMovies.map((movie) => movie.category);
   // console.log("category", category);
+
+  const bookmarked = useSelector(
+    (store: RootState) => store.bookmarked.bookmark
+  );
+
   const settings = {
     infinite: false,
     speed: 500,
@@ -24,19 +31,28 @@ const Home = () => {
     prevArrow: <></>,
     nextArrow: <></>,
   };
-
+  const dispatch = useDispatch();
   const handleClick = async (movieId: string) => {
     const url = "http://localhost:3000/api/postBookmark";
     const token = localStorage.getItem("authToken");
     const emailValue = localStorage.getItem("data.email");
-    console.log("emailValue", emailValue, "movieId", movieId);
+
+    // const frontBookmarked: string[] = [];
+
+    if (bookmarked.includes(movieId)) {
+      const updatedBookmarked = bookmarked.filter((id) => id !== movieId);
+      dispatch(setBookmarked(updatedBookmarked));
+    } else {
+      const updatedBookmarked = [...bookmarked, movieId];
+      dispatch(setBookmarked(updatedBookmarked));
+    }
 
     try {
       const response = await axios.post(
         url,
         {
           userEmail: emailValue,
-          movieID: movieId,
+          _id: movieId,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -45,6 +61,7 @@ const Home = () => {
       console.error("Error posting bookmark:", error.message);
     }
   };
+
   return (
     <>
       <div className="bg-black pt-[27px] pb-[60px]">
@@ -85,8 +102,8 @@ const Home = () => {
                       </div>
 
                       <div className="flex flex-col ml-auto h-full gap-14 mr-2 ">
-                        <div onClick={() => handleClick(movie.movieID)}>
-                          {movie.isBookmarked ? (
+                        <div onClick={() => handleClick(movie._id)}>
+                          {bookmarked.includes(movie._id) ? (
                             <div className="h-8 w-8 bg-[#10141E] opacity-[50%] rounded-full flex items-center justify-center">
                               <img src={bookmarkFull} alt="bookmarkEmpty" />
                             </div>
@@ -114,10 +131,7 @@ const Home = () => {
           <h1 className="text-xl font-outfit text-white mb-6">
             Recomended for you
           </h1>
-          <AllMoviesComponent
-            allCategory={allCategory}
-            handleClick={handleClick}
-          />
+          <AllMoviesComponent allCategory={allCategory} />
           {/* <div className="flex flex-wrap  justify-between mb-4">
             {allMovies.slice(2).map((movie, index) => (
               <div key={index} className="relative">

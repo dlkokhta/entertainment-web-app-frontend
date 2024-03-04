@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 import allMovieSlice from "./allMovieSlice";
-import { allMovieTypes } from "../types/allMovieTypes.js";
+import bookmarkedSlice from "./bookmarkedSlice";
 
 const store = configureStore({
   reducer: {
     allMovies: allMovieSlice,
+    bookmarked: bookmarkedSlice,
   },
 });
 

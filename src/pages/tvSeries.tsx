@@ -1,38 +1,35 @@
 import search from "../assets/icon-search.svg";
 import { allMovieTypes } from "../types/allMovieTypes.js";
-// import movieLogoWhite from "../assets/icon-category-movie.svg";
-// import bookmarkEmpty from "../assets/icon-bookmark-empty.svg";
-// import bookmarkFull from "../assets/icon-bookmark-full.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store.js";
 import AllMoviesComponent from "../components/AllMoviesComponent.js";
-import axios from "axios";
 
 const tvSeries = () => {
   const allMovies: allMovieTypes[] = useSelector(
     (store: RootState) => store.allMovies.movies
   );
   const tvCategory = allMovies.map((movie) => movie.category);
-  const handleClick = async (movieId: string) => {
-    const url = "http://localhost:3000/api/postBookmark";
-    const token = localStorage.getItem("authToken");
-    const emailValue = localStorage.getItem("data.email");
-    console.log("emailValue", emailValue, "movieId", movieId);
 
-    try {
-      const response = await axios.post(
-        url,
-        {
-          userEmail: emailValue,
-          movieID: movieId,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      console.log("Bookmark successfully posted:", response.data);
-    } catch (error: any) {
-      console.error("Error posting bookmark:", error.message);
-    }
-  };
+  // const handleClick = async (movieId: string) => {
+  //   const url = "http://localhost:3000/api/postBookmark";
+  //   const token = localStorage.getItem("authToken");
+  //   const emailValue = localStorage.getItem("data.email");
+  //   console.log("emailValue", emailValue, "movieId", movieId);
+
+  //   try {
+  //     const response = await axios.post(
+  //       url,
+  //       {
+  //         userEmail: emailValue,
+  //         _id: movieId,
+  //       },
+  //       { headers: { Authorization: `Bearer ${token}` } }
+  //     );
+  //     console.log("Bookmark successfully posted:", response.data);
+  //   } catch (error: any) {
+  //     console.error("Error posting bookmark:", error.message);
+  //   }
+  // };
 
   return (
     <div className="bg-black pt-[27px] pb-[60px]">
@@ -46,7 +43,7 @@ const tvSeries = () => {
 
       <div className="px-4 ">
         <h1 className="text-xl font-outfit text-white mb-6">TV Series</h1>
-        <AllMoviesComponent tvCategory={tvCategory} handleClick={handleClick} />
+        <AllMoviesComponent tvCategory={tvCategory} />
         {/* <div className="flex flex-wrap  justify-between mb-4">
           {movies
             .filter((movie) => movie.category === "TV Series")

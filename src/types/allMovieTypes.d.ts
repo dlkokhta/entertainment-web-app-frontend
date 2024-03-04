@@ -1,4 +1,5 @@
 export interface allMovieTypes {
+  _id: string;
   title: string;
   thumbnail: {
     trending: {
@@ -16,5 +17,4 @@ export interface allMovieTypes {
   rating: string;
   isBookmarked: boolean;
   isTrending: boolean;
-  movieID: string;
 }

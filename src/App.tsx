@@ -9,18 +9,19 @@ import Movies from "./pages/movies";
 import TVSeries from "./pages/tvSeries";
 import Bookmarked from "./pages/bookmarked";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setAllMovies } from "./store/allMovieSlice.js";
+import { setBookmarked } from "./store/bookmarkedSlice.js";
+import { useState } from "react";
 
-function App() {
+function App(props: any) {
   const location = useLocation();
+
   const showHeader = location.pathname ? "/home" || "/movies" : "";
 
   const token = localStorage.getItem("authToken");
-
   const dispatch = useDispatch();
-
   const url = "http://localhost:3000/api/allMovies";
 
   useEffect(() => {
@@ -31,10 +32,30 @@ function App() {
       dispatch(setAllMovies(response.data));
     };
     fetchMovies();
+  }, []);
+
+  const bookmarkUrl = "http://localhost:3000/api/bookmarked";
+
+  useEffect(() => {
+    const fetchBookmarked = async () => {
+      const response = await axios.get(bookmarkUrl, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const bookmarked = response.data;
+      const ids = bookmarked.map((item: any) => item.favoriteList);
+      const flattenedIds = ids.flat();
+      dispatch(setBookmarked(flattenedIds));
+    };
+    if (token) {
+      fetchBookmarked();
+    }
   }, [token]);
+
   return (
     <>
       {showHeader && <Header />}
+
       <Routes>
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />

@@ -1,24 +1,37 @@
 import logo from "../assets/logo.svg";
 import avatar from "../assets/image-avatar.png";
 import { useLocation, useNavigate } from "react-router-dom";
+import hamburger from "../assets/icon-hamburger.svg";
+import { useState } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleClick = (path: string) => {
     navigate(path);
+    setShowMenu(false);
+  };
+  const hanmurgerClickHandler = () => {
+    setShowMenu(true);
+  };
+  const token = localStorage.getItem("authToken");
+  const handleClick2 = (path: string) => {
+    navigate(path);
+    localStorage.clear();
   };
 
   return (
-    <div className="relative ">
-      <div className="bg-semyDarck flex justify-between items-center p-4 w-full">
+    <div className="">
+      <div className="relative  bg-semyDarck flex justify-between items-center p-4 w-full">
         <div>
           <img className="w-[25px] h-5" src={logo} />
         </div>
         <div className="w-[134px]">
-          <div className="flex justify-between">
+          <div className="flex justify-between ">
             <svg
+              className="cursor-pointer"
               onClick={() => handleClick("/")}
               width="16" // Set width to 16px
               height="16" // Set height to 16px
@@ -36,6 +49,7 @@ const Header = () => {
             </svg>
 
             <svg
+              className="cursor-pointer"
               onClick={() => handleClick("/movies")}
               width="16" // Set width to 16px
               height="16" // Set height to 16px
@@ -53,6 +67,7 @@ const Header = () => {
             </svg>
 
             <svg
+              className="cursor-pointer"
               onClick={() => handleClick("/tvSeries")}
               width="16" // Set width to 16px
               height="16" // Set height to 16px
@@ -70,6 +85,7 @@ const Header = () => {
             </svg>
 
             <svg
+              className="cursor-pointer"
               onClick={() => handleClick("/bookmarked")}
               width="16" // Set width to 16px
               height="16" // Set height to 16px
@@ -89,8 +105,41 @@ const Header = () => {
             </svg>
           </div>
         </div>
-        <div className="h-6 w-6">
-          <img src={avatar} />
+        <div>
+          {token ? (
+            <div>
+              <div className="h-6 w-6">
+                <img src={avatar} />
+              </div>
+              <div>
+                <div className="absolute text-[#5A698F] text-[13px] right-0 bg-black/ backdrop-blur-sm top-10 mr-2">
+                  {/* <img className="h-4 w-4" onClick={closeIconClickHandler} src={closeIcon} /> */}
+                  <div>
+                    <div onClick={() => handleClick2("/")}>Log Out</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div>
+              {/* <div className="h-6 w-6 cursor-pointer">
+                <img
+                  onClick={hanmurgerClickHandler}
+                  className="w-[25] h-5"
+                  src={hamburger}
+                />
+              </div> */}
+              (
+              <div className="absolute font-outfit text-[#5A698F] text-[13px] right-0 bg-black/ backdrop-blur-sm top-3 mr-2">
+                {/* <img className="h-4 w-4" onClick={closeIconClickHandler} src={closeIcon} /> */}
+                <div>
+                  <div onClick={() => handleClick("/login")}>Log In</div>
+                  <div onClick={() => handleClick("/signup")}>Sign Up</div>
+                </div>
+              </div>
+              )
+            </div>
+          )}
         </div>
       </div>
     </div>

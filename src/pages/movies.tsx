@@ -1,37 +1,32 @@
 import search from "../assets/icon-search.svg";
-import axios from "axios";
 import { allMovieTypes } from "../types/allMovieTypes.js";
-// import { useState, useEffect } from "react";
-// import movieLogoWhite from "../assets/icon-category-movie.svg";
-// import bookmarkEmpty from "../assets/icon-bookmark-empty.svg";
-// import bookmarkFull from "../assets/icon-bookmark-full.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store.js";
 import AllMoviesComponent from "../components/AllMoviesComponent.js";
 
 const Movies = () => {
-  const handleClick = async (movieId: string) => {
-    const url = "http://localhost:3000/api/postBookmark";
-    const token = localStorage.getItem("authToken");
-    const emailValue = localStorage.getItem("data.email");
-    console.log("emailValue", emailValue, "movieId", movieId);
+  // const handleClick = async (movieId: string) => {
+  //   const url = "http://localhost:3000/api/postBookmark";
+  //   const token = localStorage.getItem("authToken");
+  //   const emailValue = localStorage.getItem("data.email");
+  //   console.log("emailValue", emailValue, "movieId", movieId);
 
-    try {
-      const response = await axios.post(
-        url,
-        {
-          userEmail: emailValue,
-          movieID: movieId,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      console.log("Bookmark successfully posted:", response.data);
-    } catch (error: any) {
-      console.error("Error posting bookmark:", error.message);
-    }
-  };
+  //   try {
+  //     const response = await axios.post(
+  //       url,
+  //       {
+  //         userEmail: emailValue,
+  //         _id: movieId,
+  //       },
+  //       {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       }
+  //     );
+  //     console.log("Bookmark successfully posted:", response.data);
+  //   } catch (error: any) {
+  //     console.error("Error posting bookmark:", error.message);
+  //   }
+  // };
   const movies: allMovieTypes[] = useSelector(
     (store: RootState) => store.allMovies.movies
   );
@@ -49,10 +44,8 @@ const Movies = () => {
 
       <div className="px-4 ">
         <h1 className="text-xl font-outfit text-white mb-6">Movies</h1>
-        <AllMoviesComponent
-          movieCategory={movieCategory}
-          handleClick={handleClick}
-        />
+        <AllMoviesComponent movieCategory={movieCategory} />
+
         {/* <div className="flex flex-wrap  justify-between mb-4">
           {movies
             .filter((movie) => movie.category === "Movie")
