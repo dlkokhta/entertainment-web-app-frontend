@@ -3,6 +3,8 @@ import avatar from "../assets/image-avatar.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import hamburger from "../assets/icon-hamburger.svg";
 import { useState } from "react";
+import AllMoviesComponent from "./AllMoviesComponent";
+AllMoviesComponent;
 
 const Header = () => {
   const navigate = useNavigate();
@@ -108,12 +110,8 @@ const Header = () => {
         <div>
           {token ? (
             <div>
-              <div className="h-6 w-6">
-                <img src={avatar} />
-              </div>
               <div>
-                <div className="absolute text-[#5A698F] text-[13px] right-0 bg-black/ backdrop-blur-sm top-10 mr-2">
-                  {/* <img className="h-4 w-4" onClick={closeIconClickHandler} src={closeIcon} /> */}
+                <div className="absolute text-[#5A698F] text-[13px] top-1/2 right-0 transform -translate-y-1/2 mr-2">
                   <div>
                     <div onClick={() => handleClick2("/")}>Log Out</div>
                   </div>
@@ -122,22 +120,13 @@ const Header = () => {
             </div>
           ) : (
             <div>
-              {/* <div className="h-6 w-6 cursor-pointer">
-                <img
-                  onClick={hanmurgerClickHandler}
-                  className="w-[25] h-5"
-                  src={hamburger}
-                />
-              </div> */}
-              (
-              <div className="absolute font-outfit text-[#5A698F] text-[13px] right-0 bg-black/ backdrop-blur-sm top-3 mr-2">
+              <div className="absolute font-outfit text-[#5A698F] text-[13px] right-0 bg-black/ backdrop-blur-sm top-2 mr-2 ">
                 {/* <img className="h-4 w-4" onClick={closeIconClickHandler} src={closeIcon} /> */}
                 <div>
                   <div onClick={() => handleClick("/login")}>Log In</div>
                   <div onClick={() => handleClick("/signup")}>Sign Up</div>
                 </div>
               </div>
-              )
             </div>
           )}
         </div>

@@ -23,7 +23,7 @@ const Login = () => {
       email: data?.email,
       password: data?.password,
     };
-    console.log(userData);
+
     try {
       const response = await axios.post(url, userData);
 
@@ -33,7 +33,7 @@ const Login = () => {
       localStorage.setItem("data.email", data.email);
 
       navigate("/");
-      console.log("authToken", authToken);
+
       reset();
     } catch (error: any) {
       setServerError(error.response.data[0].type);

@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setAllMovies } from "./store/allMovieSlice.js";
 import { setBookmarked } from "./store/bookmarkedSlice.js";
-import { useState } from "react";
+
 
 function App(props: any) {
   const location = useLocation();

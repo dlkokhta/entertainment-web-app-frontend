@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface MovieState {
+  inputValue: any;
   movies: any[]; // You can replace 'any' with a more specific type for your movie data
 }
 
 const initialState: MovieState = {
+  inputValue: null,
   movies: [],
 };
 
