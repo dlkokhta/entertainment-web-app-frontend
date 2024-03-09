@@ -17,7 +17,8 @@ const Login = () => {
   const [serverError, setServerError] = useState<string | null>(null);
 
   const onSubmit = async (data: loginpTypes) => {
-    const url = "http://localhost:3000/api/login";
+    const url =
+      "https://entertainment-web-app-api-production-4cd8.up.railway.app/api/login";
 
     const userData = {
       email: data?.email,

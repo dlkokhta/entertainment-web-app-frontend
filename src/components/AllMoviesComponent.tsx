@@ -26,7 +26,8 @@ const AllMoviesComponent = () => {
   const dispatch = useDispatch();
 
   const handleClick = async (movieId: string) => {
-    const url = "http://localhost:3000/api/postBookmark";
+    const url =
+      "https://entertainment-web-app-api-production-4cd8.up.railway.app/api/postBookmark";
     const token = localStorage.getItem("authToken");
     const emailValue = localStorage.getItem("data.email");
 

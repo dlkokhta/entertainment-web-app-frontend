@@ -22,7 +22,8 @@ function App() {
 
   const token = localStorage.getItem("authToken");
   const dispatch = useDispatch();
-  const url = "http://localhost:3000/api/allMovies";
+  const url =
+    "https://entertainment-web-app-api-production-4cd8.up.railway.app/api/allMovies";
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -34,7 +35,8 @@ function App() {
     fetchMovies();
   }, []);
 
-  const bookmarkUrl = "http://localhost:3000/api/bookmarked";
+  const bookmarkUrl =
+    "https://entertainment-web-app-api-production-4cd8.up.railway.app/api/bookmarked";
 
   useEffect(() => {
     const fetchBookmarked = async () => {

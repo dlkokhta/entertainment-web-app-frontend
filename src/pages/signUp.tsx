@@ -17,7 +17,8 @@ const SignUp = () => {
   const [serverError, setServerError] = useState<string | null>(null);
 
   const onSubmit = async (data: signUpTypes) => {
-    const url = "http://localhost:3000/api/register";
+    const url =
+      "https://entertainment-web-app-api-production-4cd8.up.railway.app/api/register";
 
     const userData = {
       email: data.email,
@@ -30,7 +31,6 @@ const SignUp = () => {
 
       reset();
     } catch (error: any) {
-      
       setServerError(error.response.data[0].type);
       console.log("errorrrrr", error);
     }
