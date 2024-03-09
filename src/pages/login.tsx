@@ -46,8 +46,13 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-darckBlue px-6 pt-12 pb-[167px] h-full">
-      <div className="flex justify-center mb-[58px]">
+    <div className=" px-6 pt-12 pb-[167px] h-full lg:min-h-screen lg:px-[184px] xl:px-[520px]">
+      <div
+        className="flex justify-center mb-[58px]"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
         <svg width="33" height="27" xmlns="http://www.w3.org/2000/svg">
           <path
             d="m26.463.408 3.2 6.4h-4.8l-3.2-6.4h-3.2l3.2 6.4h-4.8l-3.2-6.4h-3.2l3.2 6.4h-4.8l-3.2-6.4h-1.6a3.186 3.186 0 0 0-3.184 3.2l-.016 19.2a3.2 3.2 0 0 0 3.2 3.2h25.6a3.2 3.2 0 0 0 3.2-3.2V.408h-6.4Z"
@@ -55,7 +60,7 @@ const Login = () => {
           />
         </svg>
       </div>
-      <div className="bg-semyDarck clear-start pt-6 px-6 pb-[26px]">
+      <div className="bg-semyDarck clear-start pt-6 px-6 pb-[26px] lg:px-8 lg:pt-8 lg:pb-8">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col items-center "
@@ -100,7 +105,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="text-white bg-red font-outfit text-base py-[14px] w-full rounded-md mb-6"
+            className="text-white bg-red font-outfit text-base py-[14px] w-full rounded-lg mb-6"
           >
             Login to your account
           </button>

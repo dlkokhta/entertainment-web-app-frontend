@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 
 import axios from "axios";
 
-const AllMoviesComponent = (props: any) => {
+const AllMoviesComponent = () => {
   const allMovies: allMovieTypes[] = useSelector(
     (store: RootState) => store.allMovies.movies
   );
@@ -18,8 +18,6 @@ const AllMoviesComponent = (props: any) => {
   const inputValue = useSelector(
     (store: RootState) => store.inputValue.inputValue
   );
-
-  console.log("inputValue", inputValue);
 
   const bookmarked = useSelector(
     (store: RootState) => store.bookmarked.bookmark
@@ -68,10 +66,9 @@ const AllMoviesComponent = (props: any) => {
   } else {
     movies = allMovies;
   }
-  console.log("movies", movies);
 
   return (
-    <div className="flex flex-wrap  justify-between mb-4">
+    <div className="grid grid-cols-2 px-4 gap-x-4 mb-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 lg:px-0 xl:gap-10 2xl:grid-cols-5">
       {movies
         .filter((movie) =>
           movie.title.toLowerCase().includes(inputValue.toLowerCase())
@@ -81,8 +78,8 @@ const AllMoviesComponent = (props: any) => {
           <div key={index} className="relative">
             <div>
               <img
-                className="w-[164px] h-[110px] rounded-lg mb-2"
-                src={movie.thumbnail.regular.small}
+                className="w-full rounded-lg mb-2  lg:gap-8 xl:h-[187px]"
+                src={movie.thumbnail.regular.large}
               />
             </div>
 
@@ -100,7 +97,7 @@ const AllMoviesComponent = (props: any) => {
                 </div>
               )}
             </div>
-            <div className="flex text-white opacity-[75%] items-center text-xs mb-2">
+            <div className="flex text-white opacity-[75%] items-center text-xs mb-2 lg:text-[13px]">
               <div>{movie.year}</div>
               <div className="bg-white rounded-full w-[3px] h-[3px] ml-[6px]" />
               <img className="w-3 h-3 ml-[6px]" src={movieLogoWhite} />
@@ -108,7 +105,7 @@ const AllMoviesComponent = (props: any) => {
               <div className="bg-white rounded-full w-[3px] h-[3px] ml-[6px]" />
               <div className="ml-[6px]">{movie.rating}</div>
             </div>
-            <h1 className="text-[15px] text-white mb-4 font-bold">
+            <h1 className="text-[15px] text-white mb-4 font-bold lg:text-xl">
               {movie.title}
             </h1>
           </div>

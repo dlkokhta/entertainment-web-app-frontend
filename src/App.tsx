@@ -14,11 +14,11 @@ import { useDispatch } from "react-redux";
 import { setAllMovies } from "./store/allMovieSlice.js";
 import { setBookmarked } from "./store/bookmarkedSlice.js";
 
-
-function App(props: any) {
+function App() {
   const location = useLocation();
 
-  const showHeader = location.pathname ? "/home" || "/movies" : "";
+  const showHeader =
+    location.pathname !== "/login" && location.pathname !== "/signUp";
 
   const token = localStorage.getItem("authToken");
   const dispatch = useDispatch();

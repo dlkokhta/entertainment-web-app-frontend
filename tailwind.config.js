@@ -30,10 +30,10 @@ export default {
       sm: "378px",
       // => @media (min-width: 640px) { ... }
 
-      md: "768px",
+      md: "576px",
       // => @media (min-width: 768px) { ... }
 
-      lg: "1440px",
+      lg: "768px",
       // => @media (min-width: 1024px) { ... }
 
       xl: "1440px",

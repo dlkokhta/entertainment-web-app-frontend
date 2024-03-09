@@ -1,23 +1,15 @@
 import logo from "../assets/logo.svg";
-import avatar from "../assets/image-avatar.png";
+
 import { useLocation, useNavigate } from "react-router-dom";
-import hamburger from "../assets/icon-hamburger.svg";
-import { useState } from "react";
-import AllMoviesComponent from "./AllMoviesComponent";
-AllMoviesComponent;
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [showMenu, setShowMenu] = useState(false);
 
   const handleClick = (path: string) => {
     navigate(path);
-    setShowMenu(false);
   };
-  const hanmurgerClickHandler = () => {
-    setShowMenu(true);
-  };
+
   const token = localStorage.getItem("authToken");
   const handleClick2 = (path: string) => {
     navigate(path);
@@ -26,19 +18,19 @@ const Header = () => {
 
   return (
     <div className="">
-      <div className="relative  bg-semyDarck flex justify-between items-center p-4 w-full">
+      <div className="relative rounded-xl bg-semyDarck flex justify-between items-center p-4 w-full lg:px-6 lg:py-7">
         <div>
-          <img className="w-[25px] h-5" src={logo} />
+          <img className="w-[25px] h-5 lg:w-8 lg:h-[26px]" src={logo} />
         </div>
-        <div className="w-[134px]">
-          <div className="flex justify-between ">
+        <div className="">
+          <div className="flex justify-between gap-6 lg:gap-8">
             <svg
-              className="cursor-pointer"
+              className="cursor-pointer lg:w-5 lg:h-5"
               onClick={() => handleClick("/")}
-              width="16" // Set width to 16px
-              height="16" // Set height to 16px
+              width="16"
+              height="16"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20" // Adjust viewBox accordingly
+              viewBox="0 0 20 20"
               fill="none"
               strokeWidth="2"
               strokeLinecap="round"
@@ -51,12 +43,12 @@ const Header = () => {
             </svg>
 
             <svg
-              className="cursor-pointer"
+              className="cursor-pointer lg:w-5 lg:h-5"
               onClick={() => handleClick("/movies")}
-              width="16" // Set width to 16px
-              height="16" // Set height to 16px
+              width="16"
+              height="16"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20" // Adjust viewBox accordingly
+              viewBox="0 0 20 20"
               fill="none"
               strokeWidth="2"
               strokeLinecap="round"
@@ -69,12 +61,12 @@ const Header = () => {
             </svg>
 
             <svg
-              className="cursor-pointer"
+              className="cursor-pointer lg:w-5 lg:h-5"
               onClick={() => handleClick("/tvSeries")}
-              width="16" // Set width to 16px
-              height="16" // Set height to 16px
+              width="16"
+              height="16"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20" // Adjust viewBox accordingly
+              viewBox="0 0 20 20"
               fill="none"
               strokeWidth="2"
               strokeLinecap="round"
@@ -87,12 +79,12 @@ const Header = () => {
             </svg>
 
             <svg
-              className="cursor-pointer"
+              className="cursor-pointer lg:w-5 lg:h-5"
               onClick={() => handleClick("/bookmarked")}
-              width="16" // Set width to 16px
-              height="16" // Set height to 16px
+              width="16"
+              height="16"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20" // Adjust viewBox accordingly
+              viewBox="0 0 20 20"
               fill="none"
               strokeWidth="2"
               strokeLinecap="round"
@@ -111,8 +103,8 @@ const Header = () => {
           {token ? (
             <div>
               <div>
-                <div className="absolute text-[#5A698F] text-[13px] top-1/2 right-0 transform -translate-y-1/2 mr-2">
-                  <div>
+                <div className="absolute text-[#5A698F] text-[13px] top-1/2 right-0 transform -translate-y-1/2 mr-2 lg:pr-4">
+                  <div className="lg:text-base">
                     <div onClick={() => handleClick2("/")}>Log Out</div>
                   </div>
                 </div>
@@ -120,9 +112,8 @@ const Header = () => {
             </div>
           ) : (
             <div>
-              <div className="absolute font-outfit text-[#5A698F] text-[13px] right-0 bg-black/ backdrop-blur-sm top-2 mr-2 ">
-                {/* <img className="h-4 w-4" onClick={closeIconClickHandler} src={closeIcon} /> */}
-                <div>
+              <div className="absolute font-outfit text-[#5A698F] text-[13px] right-0 bg-black/ backdrop-blur-sm top-2 mr-2 lg:pr-4">
+                <div className="lg:text-base">
                   <div onClick={() => handleClick("/login")}>Log In</div>
                   <div onClick={() => handleClick("/signup")}>Sign Up</div>
                 </div>

@@ -19,10 +19,10 @@ const SearchComponent = (props: SearchComponentProps) => {
     dispatch(setInputValue(e.target.value));
   };
   return (
-    <div className="flex items-center pl-[19px] pr-[102px] gap-4 mb-[27px]">
-      <img className="w-[24px] h-[24px]" src={search} />
+    <div className="flex items-center pl-[19px] pr-[102px] gap-4 mb-[27px] lg:pl-0">
+      <img className="w-[18px] h-[18px] lg:w-6 lg:h-6 " src={search} />
       <input
-        className="text-white font-outfit text-base w-full outline-none bg-transparent"
+        className="text-white font-outfit text-base w-full outline-none bg-transparent lg:text-2xl"
         placeholder={props.placeholder}
         onChange={inputChangeHandler}
         value={inputValue}
