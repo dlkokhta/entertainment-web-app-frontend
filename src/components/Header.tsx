@@ -20,7 +20,10 @@ const Header = () => {
     <div className="">
       <div className="relative rounded-xl bg-semyDarck flex justify-between items-center p-4 w-full lg:px-6 lg:py-7">
         <div>
-          <img className="w-[25px] h-5 lg:w-8 lg:h-[26px]" src={logo} />
+          <img
+            className="w-[25px] h-5 lg:w-8 lg:h-[26px] cursor-pointer"
+            src={logo}
+          />
         </div>
         <div className="">
           <div className="flex justify-between gap-6 lg:gap-8">
@@ -104,8 +107,13 @@ const Header = () => {
             <div>
               <div>
                 <div className="absolute text-[#5A698F] text-[13px] top-1/2 right-0 transform -translate-y-1/2 mr-2 lg:pr-4">
-                  <div className="lg:text-base">
-                    <div onClick={() => handleClick2("/")}>Log Out</div>
+                  <div className="lg:text-base ">
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => handleClick2("/")}
+                    >
+                      Log Out
+                    </div>
                   </div>
                 </div>
               </div>
@@ -114,8 +122,18 @@ const Header = () => {
             <div>
               <div className="absolute font-outfit text-[#5A698F] text-[13px] right-0 bg-black/ backdrop-blur-sm top-2 mr-2 lg:pr-4">
                 <div className="lg:text-base">
-                  <div onClick={() => handleClick("/login")}>Log In</div>
-                  <div onClick={() => handleClick("/signup")}>Sign Up</div>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => handleClick("/login")}
+                  >
+                    Log In
+                  </div>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => handleClick("/signup")}
+                  >
+                    Sign Up
+                  </div>
                 </div>
               </div>
             </div>

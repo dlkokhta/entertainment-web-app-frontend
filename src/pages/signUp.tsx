@@ -43,7 +43,7 @@ const SignUp = () => {
   return (
     <div className="px-6 pt-12 pb-[88px] h-full lg:min-h-screen lg:px-[184px] xl:px-[520px]">
       <div
-        className="flex justify-center mb-[58px]"
+        className="flex justify-center mb-[58px] cursor-pointer"
         onClick={() => {
           navigate("/");
         }}
@@ -125,7 +125,7 @@ const SignUp = () => {
             Alread have an account?
             <span
               onClick={signUpClickhandler}
-              className="font-outfit text-red ml-2"
+              className="font-outfit text-red ml-2 cursor-pointer"
             >
               Login
             </span>
