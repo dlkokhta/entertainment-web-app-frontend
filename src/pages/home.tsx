@@ -32,6 +32,12 @@ const Home = () => {
     nextArrow: <></>,
     responsive: [
       {
+        breakpoint: 2200,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
         breakpoint: 1900,
         settings: {
           slidesToShow: 3.5,
