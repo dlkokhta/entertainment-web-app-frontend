@@ -23,7 +23,7 @@ function App() {
   const token = localStorage.getItem("authToken");
   const dispatch = useDispatch();
   const url =
-    "https://entertainment-web-app-api-production-4cd8.up.railway.app/api/allMovies";
+    "https://entertainment-web-app.dimitrikokhtashvili.site/api/allMovies";
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   const bookmarkUrl =
-    "https://entertainment-web-app-api-production-4cd8.up.railway.app/api/bookmarked";
+    "https://entertainment-web-app.dimitrikokhtashvili.site/api/bookmarked";
 
   useEffect(() => {
     const fetchBookmarked = async () => {

@@ -18,7 +18,7 @@ const Login = () => {
 
   const onSubmit = async (data: loginpTypes) => {
     const url =
-      "https://entertainment-web-app-api-production-4cd8.up.railway.app/api/login";
+      "https://entertainment-web-app.dimitrikokhtashvili.site/api/login";
 
     const userData = {
       email: data?.email,

@@ -27,7 +27,7 @@ const AllMoviesComponent = () => {
 
   const handleClick = async (movieId: string) => {
     const url =
-      "https://entertainment-web-app-api-production-4cd8.up.railway.app/api/postBookmark";
+      "https://entertainment-web-app.dimitrikokhtashvili.site/api/postBookmark";
     const token = localStorage.getItem("authToken");
     const emailValue = localStorage.getItem("data.email");
 

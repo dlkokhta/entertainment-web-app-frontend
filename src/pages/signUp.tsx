@@ -18,7 +18,7 @@ const SignUp = () => {
 
   const onSubmit = async (data: signUpTypes) => {
     const url =
-      "https://entertainment-web-app-api-production-4cd8.up.railway.app/api/register";
+      "https://entertainment-web-app.dimitrikokhtashvili.site/api/register";
 
     const userData = {
       email: data.email,

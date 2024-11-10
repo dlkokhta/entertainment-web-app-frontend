@@ -86,7 +86,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const handleClick = async (movieId: string) => {
     const url =
-      "https://entertainment-web-app-api-production-4cd8.up.railway.app/api/postBookmark";
+      "https://space-tourism.dimitrikokhtashvili.site/api/postBookmark";
     const token = localStorage.getItem("authToken");
     const emailValue = localStorage.getItem("data.email");
 
